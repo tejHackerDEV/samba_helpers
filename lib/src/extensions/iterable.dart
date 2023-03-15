@@ -1,6 +1,9 @@
-extension IterableExtension<T> on Iterable<T> {
+extension IterableExtension<T> on Iterable<T>? {
   T? firstWhereOrNull(bool Function(T element) test, {T? Function()? orElse}) {
-    for (T element in this) {
+    if (this == null) {
+      return null;
+    }
+    for (T element in this!) {
       if (test(element)) return element;
     }
     if (orElse != null) return orElse();
